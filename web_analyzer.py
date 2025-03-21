@@ -22,31 +22,31 @@ print("The number of headings", headCount)
 print("The number of links", linkCount)
 
 #ex4
-keyword = input("Please enter a keyword: ")
+keyword = input("Please enter a keyword: ").strip()
 count = 0
 textinWeb = soup.get_text()
 words = textinWeb.lower().split()
 for word in words:
-    if word == keyword.lower():
+    strippedWord = "".join(char for char in word if char.isalnum())
+    if strippedWord == keyword.lower():
         count+= 1
 
 print("The keyword appears in the webpage", count)
 
 #ex5
-# textinWeb = soup.get_text()
-# words = textinWeb.lower().split()
 stack = {}
 for word in words:
-    if word in stack:
-        stack[word] += 1
+    strippedWord = "".join(char for char in word if char.isalnum())
+    if strippedWord in stack:
+        stack[strippedWord] += 1
     else:
-        stack[word] = 1
+        stack[strippedWord] = 1
 
 wordDiction = sorted(stack.items(), key=lambda x: x[1], reverse=True)
-top_5 = wordDiction[:5]
+top = wordDiction[:5]
 
 print("The most frequently occuring words are: ")
-for word, count in top_5:
+for word, count in top:
     print(f"{word}: {count}")
 
 #ex6
